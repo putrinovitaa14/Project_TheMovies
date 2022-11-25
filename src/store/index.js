@@ -39,7 +39,6 @@ const createArrayFromRawData = (array, moviesArray,genres) => {
     });
 };
 
-
 const getRawData = async (api, genres, paging) => {
     const moviesArray = [];
     for(let i=1; moviesArray.length < 60 && i < 10; i++) {
@@ -49,8 +48,9 @@ const getRawData = async (api, genres, paging) => {
             `${api}${paging ? `&page=${i}` : ""}`
             );
             createArrayFromRawData(results,moviesArray,genres);
+        }
+        // console.log({ moviesArray });
         return moviesArray;
-    }
 };
 
 export const fetchMovies = createAsyncThunk("tmovies/trending",
@@ -66,7 +66,22 @@ async ({ type }, thunkApi) => {
         // console.log(data);
     }
 );
-// return getRawData(`${TMDB_BASE_URL}/discover/${type}?api_key=${API_KEY}&with_genres=${genre}`)
+
+export const fetchDataByGenre = createAsyncThunk("tmovies/moviesByGenres",
+async ({genre, type }, thunkApi) => {
+        console.log("in fetch data", genre, type );
+        const {
+            tmovies: { genres },
+        } = thunkApi.getState();
+        const data = getRawData(
+            `${TMDB_BASE_URL}/discover/${type}?api_key=${API_KEY}&with_genres=${genre}`,
+            genres
+        );
+        console.log(data);
+        return data;
+    }
+);
+
 
 const TmoviesSlice = createSlice({
     name: "Tmovies",
@@ -77,6 +92,9 @@ const TmoviesSlice = createSlice({
             state.genresLoaded = true;
         });
         builder.addCase(fetchMovies.fulfilled,(state,action)=> {
+            state.movies = action.payload;
+        });
+        builder.addCase(fetchDataByGenre.fulfilled,(state,action)=> {
             state.movies = action.payload;
         });
     },

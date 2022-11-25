@@ -12,7 +12,6 @@ import Slider from "../components/Slider";
 import { fetchMovies, getGenres } from "../store";
 
 export default function Tmovies() {
-
   const [isScrolled, setIsScrolled] = useState(false);
   const navigate = useNavigate();
   const genresLoaded = useSelector((state) => state.tmovies.genresLoaded);
@@ -24,8 +23,8 @@ export default function Tmovies() {
   }, []);
 
   useEffect(()=> {
-    if(genresLoaded) dispatch(fetchMovies({type:"all"}));
-  });
+    if(genresLoaded) dispatch(fetchMovies({ type: "all" }));
+  }, [genresLoaded]);
 
   window.onscroll = () => {
     setIsScrolled(window.pageYOffset === 0 ? false : true);
@@ -118,3 +117,5 @@ const Container = styled.div`
     }
   }
 `;
+
+
