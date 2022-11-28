@@ -29,6 +29,7 @@ export default function SelectGenre({ genres, type }) {
   );
 }
 
+
 const Select = styled.select`
   margin-left: 3rem;
   cursor: pointer;

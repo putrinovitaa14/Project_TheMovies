@@ -25,11 +25,6 @@ export default function Moviespage(){
         dispatch(getGenres());
     }, []);
 
-
-    // useEffect(()=> {
-    //     if(genresLoaded) dispatch(fetchMovies({genres, type: "movies" }));
-    // }, [genresLoaded]);
-
     useEffect(()=> {
         if(genresLoaded) dispatch(fetchMovies({ type: "movies" }));
     }, [genresLoaded]);

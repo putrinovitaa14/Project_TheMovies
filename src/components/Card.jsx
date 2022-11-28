@@ -14,7 +14,7 @@ export default React.memo( function Card({movieData, isLiked = false }) {
 
     return (
         <Container 
-            onMouseEnter={ () => setIsHovered( true )} 
+            onMouseEnter={ () => setIsHovered( true )}
             onMouseLeave={ () => setIsHovered( false )}
             >
             <img src={`https://image.tmdb.org/t/p/w500${movieData.image}`} 
@@ -27,10 +27,10 @@ export default React.memo( function Card({movieData, isLiked = false }) {
                         <div className="image-video-container">
                         <img src={`https://image.tmdb.org/t/p/w500${movieData.image}`} 
                             alt="movie"  
-                            onClick={()=>navigate("/player")}
+                            onClick={()=>navigate("/detail")}
                             />
                             <video src={video} autoPlay loop muted 
-                            onClick={()=>navigate("/player")}
+                            onClick={()=>navigate("/detail")}
                             />
                         </div>
                         <div className="info-container flex column">
@@ -55,7 +55,8 @@ export default React.memo( function Card({movieData, isLiked = false }) {
                                     }
                                 </div>
                                 <div className="info">
-                                    <BiChevronDown title="More Info" />
+                                    <BiChevronDown title="More Info" 
+                                    />
                                 </div>
                             </div>
                             <div className="genres flex">
@@ -106,6 +107,7 @@ export default React.memo( function Card({movieData, isLiked = false }) {
        top: 0;
        z-index: 4;
        position: absolute;
+       transition: all 0.3s ease-out;
      }
      video {
        width: 100%;
@@ -115,6 +117,7 @@ export default React.memo( function Card({movieData, isLiked = false }) {
        top: 0;
        z-index: 5;
        position: absolute;
+       transition: all 0.3s ease-out;
      }
    }
    .info-container {

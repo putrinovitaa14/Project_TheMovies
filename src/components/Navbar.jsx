@@ -27,7 +27,8 @@ export default function Navbar({ isScrolled }) {
       <nav className={`${isScrolled ? "scrolled" : ""} flex`}>
         <div className="left flex a-center">
           <div className="brand flex a-center j-center">
-            <img src={logo} alt="Logo" />
+            {/* <img src={logo} alt="Logo" /> */}
+            <h1>T-Movies</h1>
           </div>
           <ul className="links flex">
             {links.map(({ name, link }) => {
@@ -96,6 +97,10 @@ const Container = styled.div`
         img {
           height: 4rem;
         }
+        h1 {
+          color: red;
+          font-size: 2rem;
+        }
       }
       .links {
         list-style-type: none;
@@ -104,6 +109,7 @@ const Container = styled.div`
           a {
             color: white;
             text-decoration: none;
+            font-size: 18px;
           }
         }
       }

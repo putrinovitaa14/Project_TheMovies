@@ -33,7 +33,7 @@ export default function Login() {
         <Container >
             <BackgroundImage />
             <div className="content">
-                <Header />
+                <Header signup/>
                 <div className="form-container flex column a-center j-center">
                     <div className="form flex column a-center j-center">
                         <div className="title">
