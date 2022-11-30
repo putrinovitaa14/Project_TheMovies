@@ -10,20 +10,21 @@ import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import Slider from "../components/Slider";
 import { fetchMovies, getGenres } from "../store";
+import { RiTicket2Fill, RiTicket2Line } from "react-icons/ri";
 
 export default function Tmovies() {
   const [isScrolled, setIsScrolled] = useState(false);
   const navigate = useNavigate();
   const genresLoaded = useSelector((state) => state.tmovies.genresLoaded);
-  const movies = useSelector((state) => state.tmovies.movies) 
+  const movies = useSelector((state) => state.tmovies.movies);
   const dispatch = useDispatch();
 
   useEffect(() => {
     dispatch(getGenres());
   }, []);
 
-  useEffect(()=> {
-    if(genresLoaded) dispatch(fetchMovies({ type: "all" }));
+  useEffect(() => {
+    if (genresLoaded) dispatch(fetchMovies({ type: "all" }));
   }, [genresLoaded]);
 
   window.onscroll = () => {
@@ -54,16 +55,27 @@ export default function Tmovies() {
               onClick={() => navigate("/player")}
             >
               <FaPlay />
-              Buy Ticket
+              Watch Trailer
             </button>
-            <button className="flex j-center a-center">
+            <button
+              className="flex j-center a-center"
+              onClick={() => navigate("/detail")}
+            >
               <AiOutlineInfoCircle />
               More Detail
+            </button>
+
+            <button
+              className="flex j-center a-center"
+              onClick={() => navigate("/ticket")}
+            >
+              <RiTicket2Fill />
+              Get Ticket
             </button>
           </div>
         </div>
       </div>
-      <Slider movies={movies}/>
+      <Slider movies={movies} />
     </Container>
   );
 }
@@ -117,5 +129,3 @@ const Container = styled.div`
     }
   }
 `;
-
-
